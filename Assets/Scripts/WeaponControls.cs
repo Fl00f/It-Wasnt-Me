@@ -1,15 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WeaponControls : MonoBehaviour {
+public abstract class WeaponControls : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	protected float fireRate = 2; //per second
+
+	public abstract void FireWeapon ();
+
 }

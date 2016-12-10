@@ -2,14 +2,22 @@
 using System.Collections;
 
 public class DroppedItem : MonoBehaviour {
-
+	protected bool isCurrentlyGoodBehaviour;
 	// Use this for initialization
-	void Start () {
-	
+	protected void Start () {
+		FloorSwitch.ChangeBehaviours += changeBehaviour;
+		print ("Got it");
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	protected void changeBehaviour(bool isGoodBehaviour){
+		this.isCurrentlyGoodBehaviour = isGoodBehaviour;
+	}
+
+	protected void OnDestroy(){
+		FloorSwitch.ChangeBehaviours -= changeBehaviour;
+	}
+
+	protected void OnCollisionEnter(Collision collision) {
+
 	}
 }
