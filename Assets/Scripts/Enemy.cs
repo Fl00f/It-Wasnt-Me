@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Enemy : MonoBehaviour {
-
+	[SerializeField]
 	private int health = 100;
 	public int Health{
 		get{ 
@@ -10,9 +10,12 @@ public class Enemy : MonoBehaviour {
 		}
 	}
 
+	[SerializeField]
+	private bool isEnergyType1 = false;
+
 	// Use this for initialization
 	void Start () {
-		FloorSwitch.ChangeColors += ChangeMyColorMethod;
+		FloorSwitch.ChangeColors += ChangeEnemyColor;
 	}
 	
 	// Update is called once per frame
@@ -20,10 +23,16 @@ public class Enemy : MonoBehaviour {
 	
 	}
 
-	void ChangeMyColorMethod(Color changeToColor){}
+	void ChangeEnemyColor(Color changeToColor){
+		GetComponent<Renderer> ().material.color = changeToColor;
+		isEnergyType1 = changeToColor == Color.blue ? true : false;
+	}
 
-	public void TakeDamage (int damageAmount){
-		health -= damageAmount;
+	public void TakeDamage (int damageAmount, bool isProjEnergyType1){
+		if (isEnergyType1 == isProjEnergyType1) {
+			health -= damageAmount;
+		}
+
 		if (health < 0) {
 			health = 0;
 			DestroySelf ();
@@ -31,8 +40,8 @@ public class Enemy : MonoBehaviour {
 	}
 
 	void DestroySelf(){
-		FloorSwitch.ChangeColors -= ChangeMyColorMethod;
-
+		FloorSwitch.ChangeColors -= ChangeEnemyColor;
+		Destroy (gameObject);
 	}
 
 	void OnCollisionEnter(Collision collision) {

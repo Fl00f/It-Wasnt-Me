@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
 	[SerializeField]
@@ -10,10 +10,10 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	private int currentWeapon = 0;
+	private List<WeaponControls> weapons = new List<WeaponControls>();
 
-
-
-	bool isEnergyType1;
+	public bool isEnergyType1;
 
 	[SerializeField]
 	int energyType1;
@@ -40,12 +40,52 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	public void AddHealth(int amountToAdd){
+		health += amountToAdd;
+	}
 
+	void Start(){
+		Pistol pistol = gameObject.AddComponent <Pistol>();
+		weapons.Add (pistol);
+	}
 
-	void switchWeapon(){
+	void Update(){
+
+		#region inputs
+		//cycle down
+		if (Input.GetKeyDown(KeyCode.Q)) {
+			cycleDownWeapon();
+		}
+		//cycle up
+		if (Input.GetKeyDown(KeyCode.E)) {
+			cycleUpWeapon();
+		}
+		//toggle energy type
+		if (Input.GetKeyDown(KeyCode.Tab)) {
+			isEnergyType1 = !isEnergyType1;
+		}
+		#endregion
+
+	}
+
+	void cycleUpWeapon(){
+		if (currentWeapon+1 != weapons.Count) {
+			weapons [currentWeapon].enabled = false;
+			currentWeapon++;
+			weapons [currentWeapon].enabled = true;
+		}
+	}
+
+	void cycleDownWeapon(){
+		if (currentWeapon-1 >=0) {
+			weapons [currentWeapon].enabled = false;
+			currentWeapon--;
+			weapons [currentWeapon].enabled = true;
+		}
 	}
 
 	void killPlayer(){
 
 	}
+		
 }
