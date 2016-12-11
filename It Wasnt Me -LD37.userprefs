@@ -1,20 +1,19 @@
 ﻿<Properties RefactoringSettings.EnableRefactorings="True" StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Items/HealthPack.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/EnergyBar.cs">
     <Files>
-      <File FileName="Assets/Scripts/Enemy.cs" Line="13" Column="18" />
-      <File FileName="Assets/Scripts/Player.cs" Line="63" Column="23" />
-      <File FileName="Assets/Scripts/Misc/FloorSwitch.cs" Line="59" Column="33" />
-      <File FileName="Assets/Scripts/Projectiles/Projectile.cs" Line="17" Column="12" />
-      <File FileName="Assets/Scripts/Weapons/WeaponControls.cs" Line="7" Column="11" />
-      <File FileName="Assets/Scripts/Weapons/Pistol.cs" Line="11" Column="27" />
-      <File FileName="Assets/Scripts/Projectiles/PistolBullet.cs" Line="14" Column="17" />
-      <File FileName="Assets/Scripts/Items/HealthPack.cs" Line="15" Column="3" />
-      <File FileName="Assets/Scripts/Items/DroppedItem.cs" Line="20" Column="61" />
+      <File FileName="Assets/Scripts/EnemyBase.cs" Line="28" Column="12" />
+      <File FileName="Assets/Scripts/ExplosiveEnemy.cs" Line="8" Column="21" />
+      <File FileName="Assets/Scripts/Player.cs" Line="59" Column="28" />
+      <File FileName="Assets/Scripts/Projectiles/Projectile.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Weapons/WeaponControls.cs" Line="53" Column="19" />
+      <File FileName="Assets/EnergyBar.cs" Line="30" Column="15" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/james/Desktop/It Wasnt Me -LD37/Assets/EnergyBar.cs" line="29" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
     <Watch file="../../Library/Mobile Documents/com~apple~CloudDocs/Cumulus/Robinson/Cumulus/Assets/Scripts/Tetramino.cs" line="241" offsetX="666" offsetY="1800" expression="temp" liveUpdate="False" />

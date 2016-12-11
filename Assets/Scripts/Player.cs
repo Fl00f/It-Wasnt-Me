@@ -9,27 +9,37 @@ public class Player : MonoBehaviour {
 			return health;
 		}
 	}
+	public int MAX_HEALTH = 300;
 
 	private int currentWeapon = 0;
 	private List<WeaponControls> weapons = new List<WeaponControls>();
 
 	public bool isEnergyType1;
 
-	[SerializeField]
+	public int MAX_ENERGY = 200;
+
 	int energyType1;
 	public int EnergyType1 {
+		set{ 
+			energyType1 = value;
+		}
 		get {
 			return energyType1;
 		}
 	}
 
-	[SerializeField]
 	int energyType2;
 	public int EnergyType2 {
+		set{ 
+			energyType2 = value;
+		}
 		get {
 			return energyType2;
 		}
 	}
+
+	int regenerationRate = 10; // regen per second
+	float timeCounterForRegen = 0;
 
 	public void TakeDamage(int damageAmount){
 		health -= damageAmount;
@@ -41,12 +51,19 @@ public class Player : MonoBehaviour {
 	}
 
 	public void AddHealth(int amountToAdd){
-		health += amountToAdd;
+		if (health + amountToAdd > MAX_HEALTH) {
+			health = MAX_HEALTH;
+		} else {
+			health += amountToAdd;
+		}
+
 	}
 
 	void Start(){
 		Pistol pistol = gameObject.AddComponent <Pistol>();
 		weapons.Add (pistol);
+		EnergyType1 = MAX_ENERGY;
+		EnergyType2 = MAX_ENERGY;
 	}
 
 	void Update(){
@@ -65,6 +82,8 @@ public class Player : MonoBehaviour {
 			isEnergyType1 = !isEnergyType1;
 		}
 		#endregion
+
+		regenerateEnergy ();
 
 	}
 
@@ -85,6 +104,28 @@ public class Player : MonoBehaviour {
 	}
 
 	void killPlayer(){
+		print ("Game over");
+	}
+
+
+	void regenerateEnergy(){
+		timeCounterForRegen += Time.deltaTime;
+
+		if (timeCounterForRegen > 1) {
+			timeCounterForRegen = 0;
+
+			if (EnergyType1 + regenerationRate > MAX_ENERGY) {
+				EnergyType1 = MAX_ENERGY;
+			} else {
+				EnergyType1 += regenerationRate;
+			}
+
+			if (EnergyType2 + regenerationRate > MAX_ENERGY) {
+				EnergyType2 = MAX_ENERGY;
+			} else {
+				EnergyType2 += regenerationRate;
+			}
+		}
 
 	}
 		

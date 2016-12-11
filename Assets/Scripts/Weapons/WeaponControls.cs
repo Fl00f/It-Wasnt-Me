@@ -8,6 +8,7 @@ public abstract class WeaponControls : MonoBehaviour {
 	Player player;
 	protected float fireRatePerSecond = 5f; //per second
 	protected float fireCounter = 0;
+	protected int projectileEnergyCost = 10;
 	protected bool canShoot = true;
 
 	protected void FireWeapon (){
@@ -33,7 +34,7 @@ public abstract class WeaponControls : MonoBehaviour {
 	void Update ()
 	{
 		if (Input.GetMouseButton (0)) {
-			if (canShoot) {
+			if (canShootProjectile()) {
 				FireWeapon ();
 				canShoot = false;
 			} else {
@@ -43,7 +44,23 @@ public abstract class WeaponControls : MonoBehaviour {
 					fireCounter = 0f;
 				}
 			}
-
 		}
+	}
+
+	bool canShootProjectile(){
+		if (canShoot) {
+			if (player.isEnergyType1 && (player.EnergyType1 - projectileEnergyCost) >= 0) {
+				player.EnergyType1 -= projectileEnergyCost;
+				return true;
+			} else if (!player.isEnergyType1 && (player.EnergyType2 - projectileEnergyCost) >= 0) {
+				player.EnergyType2 -= projectileEnergyCost;
+					return true;
+			} else {
+					return false;
+				}
+		} else {
+			return false;
+		}
+
 	}
 }

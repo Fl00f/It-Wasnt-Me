@@ -2,7 +2,7 @@
 using System.Collections;
 
 public abstract class DroppedItem : MonoBehaviour {
-	protected bool isCurrentlyGoodBehaviour;
+	public bool isCurrentlyGoodBehaviour;
 	// Use this for initialization
 	protected void Start () {
 		FloorSwitch.ChangeBehaviours += changeBehaviour;
@@ -25,13 +25,13 @@ public abstract class DroppedItem : MonoBehaviour {
 		if (col.gameObject.GetComponent<Player>()) {
 			playerItemAction (col.gameObject.GetComponent<Player>());
 			Destroy (gameObject);
-		} else if (col.gameObject.GetComponent<Enemy>()) {
-			enemyItemAction (col.gameObject.GetComponent<Enemy>());
+		} else if (col.gameObject.GetComponent<EnemyBase>()) {
+			enemyItemAction (col.gameObject.GetComponent<EnemyBase>());
 			Destroy (gameObject);
 			}
 	}
 
 	public abstract void playerItemAction (Player player);
 
-	public abstract void enemyItemAction (Enemy enemy);
+	public abstract void enemyItemAction (EnemyBase enemy);
 }

@@ -3,9 +3,10 @@ using System.Collections;
 
 public class MovementControls : MonoBehaviour {
 	float movementSpeed = 5f;
+	Rigidbody rig;
 	// Use this for initialization
 	void Start () {
-	
+		rig = GetComponent<Rigidbody> ();
 	}
 	
 	// Update is called once per frame
@@ -33,6 +34,7 @@ public class MovementControls : MonoBehaviour {
 			
 		#endregion
 
+		rig.velocity *= 0.1f;
 		lookAtMousePosition ();
 	}
 

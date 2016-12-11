@@ -14,7 +14,7 @@ public class HealthPack : DroppedItem {
 
 	}
 
-	public override void enemyItemAction (Enemy enemy)
+	public override void enemyItemAction (EnemyBase enemy)
 	{
 		if (isCurrentlyGoodBehaviour) {
 			//TODO

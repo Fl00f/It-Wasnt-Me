@@ -20,8 +20,8 @@ public class Projectile : MonoBehaviour {
 
 	void OnCollisionEnter (Collision collision){
 
-		if (collision.gameObject.GetComponent<Enemy>()) {
-			collision.gameObject.GetComponent<Enemy> ().TakeDamage (amountOfDamage, isEnergyType1);
+		if (collision.gameObject.GetComponent<EnemyBase>()) {
+			collision.gameObject.GetComponent<EnemyBase> ().TakeDamage (amountOfDamage, isEnergyType1);
 		}
 
 
