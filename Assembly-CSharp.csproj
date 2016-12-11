@@ -48,6 +48,7 @@
      <Compile Include="Assets\EnemyNavMeshAgent.cs" />
      <Compile Include="Assets\EnemySpawner.cs" />
      <Compile Include="Assets\EnergyBar.cs" />
+     <Compile Include="Assets\GameMaster.cs" />
      <Compile Include="Assets\HealthBar.cs" />
      <Compile Include="Assets\ItemSpawner.cs" />
      <Compile Include="Assets\MoveAlongRail.cs" />
@@ -64,6 +65,8 @@
      <Compile Include="Assets\Scripts\Spawner.cs" />
      <Compile Include="Assets\Scripts\Weapons\Pistol.cs" />
      <Compile Include="Assets\Scripts\Weapons\WeaponControls.cs" />
+     <Compile Include="Assets\TimeCaptureTest.cs" />
+     <Compile Include="Assets\Timer.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
