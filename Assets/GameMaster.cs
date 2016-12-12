@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 public class GameMaster : MonoBehaviour {
 
+	public AudioSource aud;
+	public AudioClip clip;
+
 	int currentRound = 1;
 
 	float dificultyMultiplier = 1f;
@@ -32,6 +35,8 @@ public class GameMaster : MonoBehaviour {
 
 
 		StartGame ();
+//		aud.clip = clip;
+		aud.Play ();
 	}
 	
 	// Update is called once per frame

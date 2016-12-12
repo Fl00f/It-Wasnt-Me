@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour {
-	static int timePerRound = 30;
+	static int timePerRound = 60;
 	public static int CurrentTimeLeftInRound = 30;
 	Text timerText;
 

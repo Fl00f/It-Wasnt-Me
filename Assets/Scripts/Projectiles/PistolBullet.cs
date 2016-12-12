@@ -5,7 +5,7 @@ public class PistolBullet : Projectile {
 
 	// Use this for initialization
 	void Start () {
-		amountOfDamage = 10;
+		amountOfDamage = 30;
 		projectileSpeed = 20f;
 	}
 	

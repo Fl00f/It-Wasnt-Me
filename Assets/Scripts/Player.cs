@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
 	public bool isEnergyType1;
 
-	public int MAX_ENERGY = 200;
+	public int MAX_ENERGY = 500;
 
 	int energyType1;
 
@@ -43,9 +43,11 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	int regenerationRate = 10;
+	int regenerationRate = 20;
 	// regen per second
 	float timeCounterForRegen = 0;
+
+	SpriteRenderer sr;
 
 	public void TakeDamage (int damageAmount)
 	{
@@ -91,6 +93,15 @@ public class Player : MonoBehaviour
 		weapons.Add (pistol);
 		EnergyType1 = MAX_ENERGY;
 		EnergyType2 = MAX_ENERGY;
+
+		foreach (var item in GetComponentsInChildren<SpriteRenderer>()) {
+			if (item.gameObject.name == "ChangeColorLayer") {
+				sr = item;
+			}
+		}
+
+		sr.color = isEnergyType1 ? Color.blue : Color.red;
+
 	}
 
 	void Update ()
@@ -106,8 +117,10 @@ public class Player : MonoBehaviour
 			cycleUpWeapon ();
 		}
 		//toggle energy type
-		if (Input.GetKeyDown (KeyCode.Tab)) {
+		if (Input.GetMouseButtonDown(1)) {
 			isEnergyType1 = !isEnergyType1;
+			sr.color = isEnergyType1 ? Color.blue : Color.red;
+
 		}
 		#endregion
 
