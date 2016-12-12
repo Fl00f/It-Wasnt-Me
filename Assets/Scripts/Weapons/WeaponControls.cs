@@ -15,7 +15,7 @@ public abstract class WeaponControls : MonoBehaviour {
 
 	protected void FireWeapon (){
 		GameObject proj = Instantiate (projectilePrefab) as GameObject;
-		proj.GetComponent<Renderer> ().enabled = false;
+		proj.GetComponentInChildren<SpriteRenderer> ().enabled = false;
 		proj.GetComponent<Projectile> ().isEnergyType1 = player.isEnergyType1;
 		proj.transform.position = transform.TransformPoint(WeaponNozzleOffSet);
 		proj.transform.rotation = transform.rotation;

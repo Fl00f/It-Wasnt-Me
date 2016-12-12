@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnergyPack : DroppedItem {
+public class EnergyPack : DroppedItem
+{
 
-	void Start(){
+	void Start ()
+	{
 		base.Start ();
 		isEnergyType1 = Random.Range (0, 2) == 0 ? true : false;
-		changeColor (isEnergyType1);
+//		changeToCustomColor (new Color(0,149,255), new Color(255, 90,120));
+		changeToCustomColor (new Color (0, 149, 255), Color.red);
+
 	}
 
 	public override void playerItemAction (Player player)

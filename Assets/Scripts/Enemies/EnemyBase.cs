@@ -56,6 +56,16 @@ public class EnemyBase : MonoBehaviour {
 		}
 	}
 
+	public void TakeDamage (int damageAmount){
+		health -= damageAmount;
+		
+
+		if (health < 0) {
+			health = 0;
+			DestroySelf ();
+		}
+	}
+
 	public void DestroySelf(){
 		FloorSwitch.ChangeColors -= ChangeEnemyColor;
 		GameMaster.enemies.Remove (this);

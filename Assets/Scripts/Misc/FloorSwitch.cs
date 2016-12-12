@@ -15,6 +15,8 @@ public class FloorSwitch : MonoBehaviour
 
 	Renderer ren;
 
+	protected SpriteRenderer colorChangeLayer;
+
 
 	TimeCaptureTest timeCap;
 	// Use this for initialization
@@ -26,26 +28,30 @@ public class FloorSwitch : MonoBehaviour
 
 		switch (ColorOfSwitch) {
 			case ColorsToChangeTo.Blue:
-				ren.material.color = Color.blue;
+				changeToCustomColor (Color.blue);
 			break;
 			case ColorsToChangeTo.Red:
-				ren.material.color = Color.red;
+				changeToCustomColor (Color.red);
+
 			break;
 			case ColorsToChangeTo.Green:
-				ren.material.color = Color.green;
+				changeToCustomColor (Color.green);
+
 			break;
 			case ColorsToChangeTo.Magenta:
-				ren.material.color = Color.magenta;
+				changeToCustomColor (Color.magenta);
 			break;
 			default:
 			break;
 		}
 	}
 	
-	// Update is called once per frame
-	void Update ()
-	{
-	
+	void changeToCustomColor(Color color){
+		foreach (var item in GetComponentsInChildren<SpriteRenderer>()) {
+			if (item.gameObject.name == "ChangeColorLayer") {
+				item.color = color;
+			}
+		}
 	}
 
 	void OnTriggerEnter (Collider col)

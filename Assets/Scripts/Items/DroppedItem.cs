@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class DroppedItem : MonoBehaviour {
+public abstract class DroppedItem : MonoBehaviour
+{
 	public bool isCurrentlyGoodBehaviour;
 	protected SpriteRenderer colorChangeLayer;
 	protected bool isEnergyType1 = true;
-
+	protected bool interactableWithplayer = true;
 	// Use this for initialization
-	protected void Start () {
+	protected void Start ()
+	{
 		FloorSwitch.ChangeBehaviours += changeBehaviour;
-		setSpriteRenderer ();
+		setChangeColorLayer ();
 	}
 
 	/// <summary>
@@ -17,48 +19,65 @@ public abstract class DroppedItem : MonoBehaviour {
 	/// changes for the GameObject here.
 	/// </summary>
 	/// <param name="isGoodBehaviour">If set to <c>true</c> is good behaviour.</param>
-	public abstract void changeBehaviour(bool isGoodBehaviour);
+	public abstract void changeBehaviour (bool isGoodBehaviour);
 
-	public void DestroySelf(){
+	public void DestroySelf ()
+	{
 		FloorSwitch.ChangeBehaviours -= changeBehaviour;
 		GameMaster.items.Remove (gameObject);
 		Destroy (gameObject);
 	}
 
-	void OnTriggerEnter(Collider col) {
-		if (col.gameObject.GetComponent<Player>()) {
-			playerItemAction (col.gameObject.GetComponent<Player>());
-			Destroy (gameObject);
-		} else if (col.gameObject.GetComponent<EnemyBase>()) {
-			enemyItemAction (col.gameObject.GetComponent<EnemyBase>());
-			Destroy (gameObject);
-			}
+	void OnTriggerEnter (Collider col)
+	{
+		if (col.gameObject.GetComponent<Player> () && interactableWithplayer) {
+			playerItemAction (col.gameObject.GetComponent<Player> ());
+			DestroySelf ();
+		} 
+
+		if (col.gameObject.GetComponent<EnemyBase> ()) {
+			enemyItemAction (col.gameObject.GetComponent<EnemyBase> ());
+			DestroySelf ();
+		}
 	}
 
-	protected void setSpriteRenderer(){
+	bool setChangeColorLayer ()
+	{
 		foreach (var item in GetComponentsInChildren<SpriteRenderer>()) {
 			if (item.gameObject.name == "ChangeColorLayer") {
 				colorChangeLayer = item;
+				return true;
 			}
 		}
+
+		return false;
 	}
-		
 
-	protected void changeColor(bool isEnergyType1){
-//		if (colorChangeLayer == null) {
-//			setSpriteRenderer ();
-//			colorChangeLayer.color = isEnergyType1 ? Color.blue : Color.red;
-//
-//		} else {
-//			colorChangeLayer.color = isEnergyType1 ? Color.blue : Color.red;
-//
-//		}
+	void setSpriteRenderer ()
+	{
+		colorChangeLayer = GetComponent<SpriteRenderer> ();
+	}
 
+	protected void changeToCustomColor (Color ET1Color, Color ET2Color)
+	{
+		if (colorChangeLayer == null) {
+			if (!setChangeColorLayer ()) {
+				setSpriteRenderer ();
+			}
+		} 
 
+		colorChangeLayer.color = isEnergyType1 ? ET1Color : ET2Color;
+	}
 
-		if (GetComponent<Renderer>()) {
-			GetComponent<Renderer>().material.color = isEnergyType1 ? Color.blue : Color.red;
-		}
+	protected void changeColor (bool isEnergyType1)
+	{
+		if (colorChangeLayer == null) {
+			if (!setChangeColorLayer ()) {
+				setSpriteRenderer ();
+			}
+		} 
+		colorChangeLayer.color = isEnergyType1 ? Color.blue : Color.red;
+
 	}
 
 	public abstract void playerItemAction (Player player);

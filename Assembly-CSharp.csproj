@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
      <Compile Include="Assets\Scripts\Weapons\Pistol.cs" />
      <Compile Include="Assets\Scripts\Weapons\WeaponControls.cs" />
+     <Compile Include="Assets\SpinObject.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

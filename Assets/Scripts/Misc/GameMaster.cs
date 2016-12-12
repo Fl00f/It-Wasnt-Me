@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour {
 
@@ -21,6 +22,12 @@ public class GameMaster : MonoBehaviour {
 
 	ItemSpawner itemSpawner;
 	public static List<GameObject> items = new List<GameObject>();
+
+	public GameObject playerGO;
+	public GameObject MainScreen;
+	public GameObject WinScreen;
+	public GameObject GameOverScreen;
+
 	// Use this for initialization
 	void Start () {
 		timer = FindObjectOfType<Timer> ();
@@ -29,19 +36,22 @@ public class GameMaster : MonoBehaviour {
 		enemySpawner = FindObjectOfType<EnemySpawner> ();
 		itemSpawner = FindObjectOfType<ItemSpawner> ();
 
+
+
 		foreach (var item in timerCaps) {
 			item.enabled = false;
 		}
 
-
-		StartGame ();
-//		aud.clip = clip;
-		aud.Play ();
+		playerGO = FindObjectOfType<Player> ().gameObject;
+		playerGO.SetActive (false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
+		if (!aud.isPlaying) {
+			aud.Play ();
+		}
 		#region ForTesting
 		if (Input.GetKeyDown(KeyCode.C)) {
 			StopRound ();
@@ -61,12 +71,16 @@ public class GameMaster : MonoBehaviour {
 	}
 
 	public void StartGame(){
+		playerGO.SetActive (true);
+		MainScreen.SetActive (false);
 		StartRound (false);
 	}
 
 	public void StartRound(bool isNewRound){
+
 		if (isNewRound) {
 			currentRound++;
+			levelUp ();
 		}
 
 		Timer.ResetTimer();
@@ -75,8 +89,11 @@ public class GameMaster : MonoBehaviour {
 			item.enabled = true;
 
 			if (!item.GetComponent<Player>() && currentRound > 1) {
+				GameObject spiralCenter = FindObjectOfType<SpinObject> ().gameObject; // short on time
+				spiralCenter.SetActive (false);
 				item.StartPlayBack (true);
 			} else if(item.GetComponent<Player>()){
+				FindObjectOfType<SpinObject> ().gameObject.SetActive (true);
 				item.StartRecordingData(true);
 			}
 
@@ -85,8 +102,6 @@ public class GameMaster : MonoBehaviour {
 		setSpawnTimers ();
 		InvokeRepeating ("spawnEnemies", 0, spawnEnemyTimer);
 		InvokeRepeating ("spawnItems", spawnItemsTimer, spawnItemsTimer);
-
-
 	}
 
 	public void StopRound(){
@@ -121,6 +136,22 @@ public class GameMaster : MonoBehaviour {
 			enemies.Clear ();
 		}
 
+	}
+
+	public void BackToMain(){
+		MainScreen.SetActive (true);
+		WinScreen.SetActive (false);
+		GameOverScreen.SetActive (false);
+
+	}
+
+	public void GameOver(){
+		GameOverScreen.SetActive (true);
+		reset ();
+	}
+
+	public void Win(){
+		WinScreen.SetActive (true);
 	}
 
 	void setSpawnTimers(){

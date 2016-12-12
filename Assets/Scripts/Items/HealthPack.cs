@@ -1,7 +1,10 @@
-﻿/*
- * Good to use as first template
- */ 
-public class HealthPack : DroppedItem {
+﻿using UnityEngine;
+
+public class HealthPack : DroppedItem
+{
+
+	public Sprite healthPack;
+	public Sprite bombPack;
 
 	#region implemented abstract members of DroppedItem
 
@@ -17,10 +20,16 @@ public class HealthPack : DroppedItem {
 
 	public override void enemyItemAction (EnemyBase enemy)
 	{
-		if (isCurrentlyGoodBehaviour) {
-			//TODO
+		
+		if (!isCurrentlyGoodBehaviour) {
+			interactableWithplayer = false;
+			foreach (var enemys in FindObjectsOfType<EnemyBase>()) {
+				if (Vector3.Distance (transform.position, enemys.transform.position) < 2) {
+					enemys.TakeDamage (100);
+				}
+			}
 		} else {
-			//TODO
+			interactableWithplayer = true;
 		}
 	}
 
@@ -28,10 +37,11 @@ public class HealthPack : DroppedItem {
 	{
 		this.isCurrentlyGoodBehaviour = isGoodBehaviour;
 		//Visual changes are done here
-
+		GetComponent<SpriteRenderer> ().sprite = isGoodBehaviour ? healthPack : bombPack;
 
 //		GetComponent<Renderer> ().material.color = Color.red; //For testing purposes
 	}
+
 	#endregion
 
 
