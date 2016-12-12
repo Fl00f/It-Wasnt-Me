@@ -2,28 +2,33 @@
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour {
-	int timePerRound = 60;
-	public static int CurrentTimeLeftInTimer = 0;
+	static int timePerRound = 30;
+	public static int CurrentTimeLeftInRound = 30;
 	Text timerText;
 
 	string timerString = "Time: ";
 	// Use this for initialization
 	void Start () {
-		CurrentTimeLeftInTimer = timePerRound;
+		CurrentTimeLeftInRound = timePerRound;
 		timerText = GetComponent<Text> ();
 		InvokeRepeating ("DeductTimeFromTimers", 1, 1);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		timerText.text = timerString + CurrentTimeLeftInTimer.ToString ();
+		timerText.text = timerString + CurrentTimeLeftInRound.ToString ();
 	}
 
 	void DeductTimeFromTimers(){
-		if (CurrentTimeLeftInTimer - 1 < 0) {
-			CurrentTimeLeftInTimer = 0;
+		if (CurrentTimeLeftInRound - 1 < 0) {
+			CurrentTimeLeftInRound = 0;
 		} else {
-			CurrentTimeLeftInTimer -= 1;
+			CurrentTimeLeftInRound -= 1;
 		}
+	}
+
+	public static void ResetTimer(){
+
+		CurrentTimeLeftInRound = timePerRound;
 	}
 }

@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour {
 	void Start () {
 		spawnLocations = new List<Transform>();
 
-		foreach (var loc in GetComponentInChildren<Transform>()) {
+		foreach (Transform loc in GetComponentInChildren<Transform>()) {
 			if (loc != transform) {
 				spawnLocations.Add ((Transform)loc);
 			}
@@ -28,10 +28,11 @@ public class EnemySpawner : MonoBehaviour {
 		return EnemyPrefabs[Random.Range(0,EnemyPrefabs.Length)];
 	}
 
-	public void SpawnEnemy(){
+	public EnemyBase SpawnEnemy(){
 		GameObject temp = Instantiate(getEnemyPrefab()) as GameObject;
 		temp.GetComponent<EnemyBase> ().IsEnergyType1 = getEnergyTypeForSpawn ();
 		temp.transform.position = spawnLocations [Random.Range(0,spawnLocations.Count)].position;
+		return temp.GetComponent<EnemyBase> ();
 	}
 
 	bool getEnergyTypeForSpawn(){

@@ -19,10 +19,19 @@ public class EnemyBase : MonoBehaviour {
 			return isEnergyType1;
 		}
 		set {
-			GetComponent<Renderer> ().material.color = value ? Color.blue : Color.red;
+			foreach (var item in GetComponentsInChildren<SpriteRenderer>()) {
+				if (item.gameObject.name == "ChangeColorLayer") {
+					sr = item;
+				}
+			}
+			sr.color = value ? Color.blue : Color.red;
+//			GetComponent<Renderer> ().material.color = value ? Color.blue : Color.red;
 			isEnergyType1 = value;
 		}
 	}
+
+
+	SpriteRenderer sr;
 
 	void Start () {
 		start ();
@@ -32,8 +41,8 @@ public class EnemyBase : MonoBehaviour {
 	}
 
 	protected void ChangeEnemyColor(Color changeToColor){
-		GetComponent<Renderer> ().material.color = changeToColor;
 		isEnergyType1 = changeToColor == Color.blue ? true : false;
+		sr.color = changeToColor;
 	}
 
 	public void TakeDamage (int damageAmount, bool isProjEnergyType1){
@@ -47,8 +56,9 @@ public class EnemyBase : MonoBehaviour {
 		}
 	}
 
-	protected void DestroySelf(){
+	public void DestroySelf(){
 		FloorSwitch.ChangeColors -= ChangeEnemyColor;
+		GameMaster.enemies.Remove (this);
 		Destroy (gameObject);
 	}
 

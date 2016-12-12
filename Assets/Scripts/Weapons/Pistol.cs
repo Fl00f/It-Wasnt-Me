@@ -9,6 +9,7 @@ public class Pistol : WeaponControls
 		fireRatePerSecond = 10f;
 		projectilePrefabName = "projectile";
 		loadProjectilePrefab ();
+		WeaponNozzleOffSet = new Vector3 (0.636f, 0f, 1.7f);
 		base.Start ();
 	}
 

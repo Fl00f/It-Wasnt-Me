@@ -1,26 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
 	[SerializeField]
 	int health = 300;
+
 	public int Health {
 		get {
 			return health;
 		}
 	}
+
 	public int MAX_HEALTH = 300;
 
 	private int currentWeapon = 0;
-	private List<WeaponControls> weapons = new List<WeaponControls>();
+	private List<WeaponControls> weapons = new List<WeaponControls> ();
 
 	public bool isEnergyType1;
 
 	public int MAX_ENERGY = 200;
 
 	int energyType1;
+
 	public int EnergyType1 {
-		set{ 
+		set { 
 			energyType1 = value;
 		}
 		get {
@@ -29,8 +33,9 @@ public class Player : MonoBehaviour {
 	}
 
 	int energyType2;
+
 	public int EnergyType2 {
-		set{ 
+		set { 
 			energyType2 = value;
 		}
 		get {
@@ -38,47 +43,70 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	int regenerationRate = 10; // regen per second
+	int regenerationRate = 10;
+	// regen per second
 	float timeCounterForRegen = 0;
 
-	public void TakeDamage(int damageAmount){
+	public void TakeDamage (int damageAmount)
+	{
 		health -= damageAmount;
 
-		if (health <0) {
+		if (health < 0) {
 			health = 0;
 			killPlayer ();
 		}
 	}
 
-	public void AddHealth(int amountToAdd){
+	public void AddHealth (int amountToAdd)
+	{
 		if (health + amountToAdd > MAX_HEALTH) {
 			health = MAX_HEALTH;
 		} else {
 			health += amountToAdd;
 		}
-
 	}
 
-	void Start(){
-		Pistol pistol = gameObject.AddComponent <Pistol>();
+	public void AddEnergy (int amountToAdd, bool isEnergyType1)
+	{
+
+		if (isEnergyType1) {
+			if (EnergyType1 + amountToAdd > MAX_ENERGY) {
+				EnergyType1 = MAX_ENERGY;
+			} else {
+				EnergyType1 += amountToAdd;
+			}
+		
+		} else {
+			if (EnergyType2 + amountToAdd > MAX_ENERGY) {
+				EnergyType2 = MAX_ENERGY;
+			} else {
+				EnergyType2 += amountToAdd;
+			}
+		}
+	}
+
+	void Start ()
+	{
+		Pistol pistol = gameObject.AddComponent <Pistol> ();
 		weapons.Add (pistol);
 		EnergyType1 = MAX_ENERGY;
 		EnergyType2 = MAX_ENERGY;
 	}
 
-	void Update(){
+	void Update ()
+	{
 
 		#region inputs
 		//cycle down
-		if (Input.GetKeyDown(KeyCode.Q)) {
-			cycleDownWeapon();
+		if (Input.GetKeyDown (KeyCode.Q)) {
+			cycleDownWeapon ();
 		}
 		//cycle up
-		if (Input.GetKeyDown(KeyCode.E)) {
-			cycleUpWeapon();
+		if (Input.GetKeyDown (KeyCode.E)) {
+			cycleUpWeapon ();
 		}
 		//toggle energy type
-		if (Input.GetKeyDown(KeyCode.Tab)) {
+		if (Input.GetKeyDown (KeyCode.Tab)) {
 			isEnergyType1 = !isEnergyType1;
 		}
 		#endregion
@@ -87,28 +115,32 @@ public class Player : MonoBehaviour {
 
 	}
 
-	void cycleUpWeapon(){
-		if (currentWeapon+1 != weapons.Count) {
+	void cycleUpWeapon ()
+	{
+		if (currentWeapon + 1 != weapons.Count) {
 			weapons [currentWeapon].enabled = false;
 			currentWeapon++;
 			weapons [currentWeapon].enabled = true;
 		}
 	}
 
-	void cycleDownWeapon(){
-		if (currentWeapon-1 >=0) {
+	void cycleDownWeapon ()
+	{
+		if (currentWeapon - 1 >= 0) {
 			weapons [currentWeapon].enabled = false;
 			currentWeapon--;
 			weapons [currentWeapon].enabled = true;
 		}
 	}
 
-	void killPlayer(){
+	void killPlayer ()
+	{
 		print ("Game over");
 	}
 
 
-	void regenerateEnergy(){
+	void regenerateEnergy ()
+	{
 		timeCounterForRegen += Time.deltaTime;
 
 		if (timeCounterForRegen > 1) {

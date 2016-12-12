@@ -16,6 +16,7 @@ public class Projectile : MonoBehaviour {
 
 	protected void Start(){
 		GetComponent<Renderer> ().material.color = isEnergyType1 ? Color.blue : Color.red;
+		GetComponent<Renderer> ().enabled = true;
 	}
 
 	void OnCollisionEnter (Collision collision){

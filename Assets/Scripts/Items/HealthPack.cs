@@ -2,6 +2,7 @@
  * Good to use as first template
  */ 
 public class HealthPack : DroppedItem {
+
 	#region implemented abstract members of DroppedItem
 
 	public override void playerItemAction (Player player)

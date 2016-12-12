@@ -15,9 +15,13 @@ public class FloorSwitch : MonoBehaviour
 
 	Renderer ren;
 
+
+	TimeCaptureTest timeCap;
 	// Use this for initialization
 	void Start ()
 	{
+		timeCap = FindObjectOfType<TimeCaptureTest> ();
+
 		ren = GetComponent<Renderer> ();
 
 		switch (ColorOfSwitch) {
@@ -36,8 +40,6 @@ public class FloorSwitch : MonoBehaviour
 			default:
 			break;
 		}
-
-
 	}
 	
 	// Update is called once per frame
@@ -54,21 +56,30 @@ public class FloorSwitch : MonoBehaviour
 					if (ChangeColors != null) {
 						ChangeColors.Invoke (Color.blue);
 					}
+					timeCap.AddChangeColorTriggerData (true);
+
 				break;
 				case ColorsToChangeTo.Red:
 					if (ChangeColors != null) {
 						ChangeColors.Invoke (Color.red);
+
 					}
+					timeCap.AddChangeColorTriggerData (false);
+
 				break;
 				case ColorsToChangeTo.Green:
 					if (ChangeBehaviours != null) {
 						ChangeBehaviours.Invoke (true);
 					}
+					timeCap.AddChangeBehaviourTriggerData (true);
+
 				break;
 				case ColorsToChangeTo.Magenta:
 					if (ChangeBehaviours != null) {
 						ChangeBehaviours.Invoke (false);
 					}
+					timeCap.AddChangeBehaviourTriggerData (false);
+
 				break;
 				default:
 				break;
