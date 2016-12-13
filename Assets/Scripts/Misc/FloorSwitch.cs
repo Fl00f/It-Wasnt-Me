@@ -90,7 +90,10 @@ public class FloorSwitch : MonoBehaviour
 				default:
 				break;
 			}
+			GetComponent<AudioSource> ().Play ();
 		}
+
+
 	}
 
 	public enum ColorsToChangeTo

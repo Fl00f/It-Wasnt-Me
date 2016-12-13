@@ -6,6 +6,8 @@ public class EnemySpawner : MonoBehaviour {
 	public List<Transform> spawnLocations;
 	public GameObject[] EnemyPrefabs;
 
+	public bool CanSpawn = false;
+
 	// Use this for initialization
 	void Start () {
 		spawnLocations = new List<Transform>();
@@ -19,9 +21,9 @@ public class EnemySpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.Space)) {
-			SpawnEnemy ();
-		}
+//		if (Input.GetKeyDown(KeyCode.Space)) {
+//			SpawnEnemy ();
+//		}
 	}
 
 	GameObject getEnemyPrefab(){
@@ -29,6 +31,7 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
 	public EnemyBase SpawnEnemy(){
+
 		GameObject temp = Instantiate(getEnemyPrefab()) as GameObject;
 		temp.GetComponent<EnemyBase> ().IsEnergyType1 = getEnergyTypeForSpawn ();
 		temp.transform.position = spawnLocations [Random.Range(0,spawnLocations.Count)].position;

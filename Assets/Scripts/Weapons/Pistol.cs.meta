@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: 13076e808e6ba487994635c5caa57cc5
-timeCreated: 1481527158
+timeCreated: 1481586071
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
+  - audioSource: {instanceID: 0}
+  - FireProjectile: {fileID: 8300000, guid: 7fa9d3af0d4104cc199589f17a12d517, type: 3}
   - projectilePrefab: {fileID: 1000014277227114, guid: ff9c8daf0738f4b7e98efe361a900ed4,
       type: 2}
   executionOrder: 0

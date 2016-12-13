@@ -17,9 +17,12 @@ public class EnergyPack : DroppedItem
 	{
 		if (isCurrentlyGoodBehaviour) {
 			player.AddEnergy (30, isEnergyType1);
+			audioSource.clip = PickedUpItemGood;
+			audioSource.Play ();
 		} else {
 			//TODO
 		}
+
 
 	}
 
@@ -29,7 +32,12 @@ public class EnergyPack : DroppedItem
 			//TODO
 		} else {
 			//TODO
+			audioSource.clip = PickedUpItemBad;
+			audioSource.Play ();
+
 		}
+
+
 	}
 
 	public override void changeBehaviour (bool isGoodBehaviour)

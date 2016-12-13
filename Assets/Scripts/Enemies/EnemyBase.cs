@@ -2,6 +2,11 @@
 using System.Collections;
 
 public class EnemyBase : MonoBehaviour {
+	public AudioSource audioSource;
+	public AudioClip DieClip;
+	public AudioClip HitEnemyCorrectEnergy;
+	public AudioClip HitEnemyWrongEnergy;
+
 	[SerializeField]
 	private int health = 100;
 	public int Health{
@@ -35,6 +40,8 @@ public class EnemyBase : MonoBehaviour {
 
 	void Start () {
 		start ();
+		audioSource = GetComponent<AudioSource> ();
+
 	}
 	protected void start () {
 		FloorSwitch.ChangeColors += ChangeEnemyColor;
@@ -48,12 +55,17 @@ public class EnemyBase : MonoBehaviour {
 	public void TakeDamage (int damageAmount, bool isProjEnergyType1){
 		if (isEnergyType1 == isProjEnergyType1) {
 			health -= damageAmount;
+			audioSource.clip = HitEnemyCorrectEnergy;
+		} else {
+			audioSource.clip = HitEnemyWrongEnergy;
+
 		}
 
 		if (health < 0) {
 			health = 0;
 			DestroySelf ();
 		}
+		audioSource.Play ();
 	}
 
 	public void TakeDamage (int damageAmount){

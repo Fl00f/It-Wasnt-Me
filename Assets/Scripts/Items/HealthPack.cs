@@ -38,7 +38,7 @@ public class HealthPack : DroppedItem
 		this.isCurrentlyGoodBehaviour = isGoodBehaviour;
 		//Visual changes are done here
 		GetComponent<SpriteRenderer> ().sprite = isGoodBehaviour ? healthPack : bombPack;
-
+		interactableWithplayer = !interactableWithplayer;
 //		GetComponent<Renderer> ().material.color = Color.red; //For testing purposes
 	}
 

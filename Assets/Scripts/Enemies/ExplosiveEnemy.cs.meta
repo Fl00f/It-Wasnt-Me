@@ -1,10 +1,15 @@
 fileFormatVersion: 2
 guid: dcd61031155ed42b98d284d0aa867da9
-timeCreated: 1481420614
+timeCreated: 1481587929
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - audioSource: {instanceID: 0}
+  - DieClip: {fileID: 8300000, guid: 1105d865ff2004b46975bc1b82409532, type: 3}
+  - HitEnemyCorrectEnergy: {fileID: 8300000, guid: e03d7f75c4bdf4d52a24397bf3bff33d,
+      type: 3}
+  - HitEnemyWrongEnergy: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

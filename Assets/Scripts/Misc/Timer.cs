@@ -11,7 +11,6 @@ public class Timer : MonoBehaviour {
 	void Start () {
 		CurrentTimeLeftInRound = timePerRound;
 		timerText = GetComponent<Text> ();
-		InvokeRepeating ("DeductTimeFromTimers", 1, 1);
 	}
 	
 	// Update is called once per frame
@@ -25,6 +24,16 @@ public class Timer : MonoBehaviour {
 		} else {
 			CurrentTimeLeftInRound -= 1;
 		}
+	}
+
+	public void StopTimer(){
+
+		CancelInvoke ();
+	}
+
+	public void StartTimer(){
+		InvokeRepeating ("DeductTimeFromTimers", 1, 1);
+
 	}
 
 	public static void ResetTimer(){

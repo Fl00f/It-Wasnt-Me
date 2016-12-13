@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
+	public AudioSource audioSource;
+	public AudioClip DieClip;
+	public AudioClip ChangeEnergy;
+
 	[SerializeField]
 	int health = 300;
 
@@ -47,6 +51,8 @@ public class Player : MonoBehaviour
 	// regen per second
 	float timeCounterForRegen = 0;
 
+	public bool IsDead = false;
+
 	SpriteRenderer sr;
 
 	public void TakeDamage (int damageAmount)
@@ -89,8 +95,8 @@ public class Player : MonoBehaviour
 
 	void Start ()
 	{
-		Pistol pistol = gameObject.AddComponent <Pistol> ();
-		weapons.Add (pistol);
+//		Pistol pistol = gameObject.AddComponent <Pistol> ();
+//		weapons.Add (pistol);
 		EnergyType1 = MAX_ENERGY;
 		EnergyType2 = MAX_ENERGY;
 
@@ -120,6 +126,8 @@ public class Player : MonoBehaviour
 		if (Input.GetMouseButtonDown(1)) {
 			isEnergyType1 = !isEnergyType1;
 			sr.color = isEnergyType1 ? Color.blue : Color.red;
+			audioSource.clip = ChangeEnergy;
+			audioSource.Play();
 
 		}
 		#endregion
@@ -148,7 +156,8 @@ public class Player : MonoBehaviour
 
 	void killPlayer ()
 	{
-		print ("Game over");
+		audioSource.clip = DieClip;
+		audioSource.Play ();
 	}
 
 

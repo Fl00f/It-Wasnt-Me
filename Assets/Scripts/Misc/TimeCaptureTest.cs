@@ -53,8 +53,6 @@ public class TimeCaptureTest : MonoBehaviour
 	void Update ()
 	{
 
-		print ("Rec: " + RecChangeColorData.Count);
-		print ("PB: " + PBChangeColorData.Count);
 
 		if (GetComponent<Player> ()) {
 			if (Input.GetKeyDown (KeyCode.I)) {
@@ -113,7 +111,6 @@ public class TimeCaptureTest : MonoBehaviour
 //			resetRecordedData ();// should be ready for play back
 //			ResetRecSwitchData ();
 //		}
-		print ("Recording: " + shouldStart);
 	}
 
 	public void StartPlayBack (bool shouldStart)
@@ -130,7 +127,6 @@ public class TimeCaptureTest : MonoBehaviour
 //			ResetPBSwitchData ();
 //		}
 
-		print ("Playing Back: " + shouldStart);
 	}
 
 	void resetRecordedData ()
@@ -221,15 +217,13 @@ public class TimeCaptureTest : MonoBehaviour
 
 	public void AddChangeColorTriggerData (bool isEnergyType1)
 	{
-		print ("added Change color");
 		RecChangeColorData.Add (isEnergyType1);
 		RecChangeColorTime.Add (triggerTimer);
 	}
 
 	public void AddChangeBehaviourTriggerData (bool isGoodBehaviour)
 	{
-		print ("added Change BH");
-
+		
 		RecChangeBehaviourData.Add (isGoodBehaviour);
 		RecChangeBehaviourTime.Add (triggerTimer);
 	}

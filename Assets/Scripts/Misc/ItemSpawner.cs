@@ -5,6 +5,9 @@ public class ItemSpawner : Spawner {
 
 	public List<Transform> ItemSpawnLocations;
 	public GameObject[] ItemPrefabsToSpawn;
+
+	public bool CanSpawn = false;
+
 	// Use this for initialization
 	void Start () {
 		spawnLocations = ItemSpawnLocations;

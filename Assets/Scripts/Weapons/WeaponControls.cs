@@ -2,6 +2,9 @@
 using System.Collections;
 
 public abstract class WeaponControls : MonoBehaviour {
+	public AudioSource audioSource;
+	public AudioClip FireProjectile;
+
 	public GameObject projectilePrefab;
 	protected string projectilePrefabName = "projectile";
 	protected string projectilePrefabLocation = "Prefabs/Projectiles/";
@@ -19,6 +22,8 @@ public abstract class WeaponControls : MonoBehaviour {
 		proj.GetComponent<Projectile> ().isEnergyType1 = player.isEnergyType1;
 		proj.transform.position = transform.TransformPoint(WeaponNozzleOffSet);
 		proj.transform.rotation = transform.rotation;
+
+		audioSource.Play ();
 	}
 
 	protected float calculatedFireRate(){

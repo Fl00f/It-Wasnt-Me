@@ -3,6 +3,10 @@ using System.Collections;
 
 public abstract class DroppedItem : MonoBehaviour
 {
+	public AudioSource audioSource;
+	public AudioClip PickedUpItemGood;
+	public AudioClip PickedUpItemBad;
+
 	public bool isCurrentlyGoodBehaviour;
 	protected SpriteRenderer colorChangeLayer;
 	protected bool isEnergyType1 = true;
@@ -10,6 +14,8 @@ public abstract class DroppedItem : MonoBehaviour
 	// Use this for initialization
 	protected void Start ()
 	{
+		audioSource = GetComponent<AudioSource> ();
+
 		FloorSwitch.ChangeBehaviours += changeBehaviour;
 		setChangeColorLayer ();
 	}
@@ -35,7 +41,7 @@ public abstract class DroppedItem : MonoBehaviour
 			DestroySelf ();
 		} 
 
-		if (col.gameObject.GetComponent<EnemyBase> ()) {
+		if (col.gameObject.GetComponent<EnemyBase> () && !interactableWithplayer) {
 			enemyItemAction (col.gameObject.GetComponent<EnemyBase> ());
 			DestroySelf ();
 		}
